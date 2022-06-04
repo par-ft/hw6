@@ -25,36 +25,34 @@ namespace q2
         std::vector<std::string> row;
         std::string line, word;
 
-        std::fstream file(filename, std::ios::in);
-        if (file.is_open())
+        std::ifstream file(filename);
+
+        size_t row_num{};
+        while (getline(file, line))
         {
-            size_t row_num{};
-            while (getline(file, line))
+            row.clear();
+
+            std::stringstream str(line);
+            while (getline(str, word, ','))
+                row.push_back(word);
+
+            if (row_num == 0 || row_num == 1)
             {
-                row.clear();
-
-                std::stringstream str(line);
-                while (getline(str, word, ','))
-                    row.push_back(word);
-
-                if (row_num == 0 || row_num == 1)
-                {
-                    row_num++;
-                    continue;
-                }
-
-                row[0].erase(remove_if(row[0].begin(), row[0].end(), isspace), row[0].end());
-                row[1].erase(remove_if(row[1].begin(), row[1].end(), isspace), row[1].end());
-
-                Patient patient{};
-                patient.name = row[0] + " " + row[1];
-                std::stringstream(row[2]) >> patient.age;
-                std::stringstream(row[3]) >> patient.smokes;
-                std::stringstream(row[4]) >> patient.area_q;
-                std::stringstream(row[5]) >> patient.alkhol;
-
-                patients.push_back(patient);
+                row_num++;
+                continue;
             }
+
+            row[0].erase(remove_if(row[0].begin(), row[0].end(), isspace), row[0].end());
+            row[1].erase(remove_if(row[1].begin(), row[1].end(), isspace), row[1].end());
+
+            Patient patient{};
+            patient.name = row[0] + " " + row[1];
+            std::stringstream(row[2]) >> patient.age;
+            std::stringstream(row[3]) >> patient.smokes;
+            std::stringstream(row[4]) >> patient.area_q;
+            std::stringstream(row[5]) >> patient.alkhol;
+
+            patients.push_back(patient);
         }
 
         return patients;

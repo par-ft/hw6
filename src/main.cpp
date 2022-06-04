@@ -11,7 +11,6 @@ int main(int argc, char **argv)
     if (false) // make false to run unit-tests
     {
         // debug section
-
     }
     else
     {
@@ -23,5 +22,5 @@ int main(int argc, char **argv)
         else
             std::cout << "FAILED" << std::endl;
     }
-    return 0;   
+    return 0;
 }
