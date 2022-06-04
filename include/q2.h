@@ -45,7 +45,7 @@ namespace q2
             row[0].erase(remove_if(row[0].begin(), row[0].end(), isspace), row[0].end());
             row[1].erase(remove_if(row[1].begin(), row[1].end(), isspace), row[1].end());
 
-            Patient patient{};
+            Patient patient;
             patient.name = row[0] + " " + row[1];
             std::stringstream(row[2]) >> patient.age;
             std::stringstream(row[3]) >> patient.smokes;
