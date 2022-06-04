@@ -7,7 +7,7 @@
 namespace q1
 {
     template <typename T, typename Func = std::function<T(T)>>
-    inline T gradient_descent(T initial_value, T step, Func func = Func{})
+    T gradient_descent(T initial_value, T step, Func func = Func{})
     {
         T h{static_cast<T>(pow(10, -7))};
         T optimum{initial_value};
