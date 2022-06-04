@@ -6,6 +6,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <functional>
+
 namespace q2
 {
     struct Patient
@@ -58,8 +60,10 @@ namespace q2
         return patients;
     }
 
-    inline std::vector<Patient> sort(std::vector<Patient> patients)
+    inline void sort(std::vector<Patient> &patients)
     {
+        std::sort(patients.begin(), patients.end(), [](const Patient &a, const Patient &b) -> bool
+                  { return (3 * a.age + 5 * a.smokes + 2 * a.area_q + 4 * a.alkhol) > (3 * b.age + 5 * b.smokes + 2 * b.area_q + 4 * b.alkhol); });
     }
 }
 
