@@ -43,8 +43,9 @@ TEST(HW6Test, TEST4)
     auto min = q1::gradient_descent<double, Func>(0.0, 0.01);
     EXPECT_NEAR(min, -1.57, 0.01);
 }
-/*
-TEST(HW6Test, TEST5) {
+
+TEST(HW6Test, TEST5)
+{
     std::vector<q2::Patient> patients = q2::read_file("lung_cancer.csv");
     EXPECT_EQ(patients.size(), 59);
     EXPECT_EQ(patients[0].name, "John Wick");
@@ -60,7 +61,8 @@ TEST(HW6Test, TEST5) {
     EXPECT_EQ(patients[58].alkhol, 0);
 }
 
-TEST(HW6Test, TEST6) {
+TEST(HW6Test, TEST6)
+{
     std::vector<q2::Patient> patients = q2::read_file("lung_cancer.csv");
 
     q2::sort(patients);
@@ -69,7 +71,7 @@ TEST(HW6Test, TEST6) {
     EXPECT_EQ(patients[30].name, "Jane Wyman");
     EXPECT_EQ(patients[58].name, "Joan Crawford");
 }
-
+/*
 TEST(HW6Test, TEST7) {
     auto flights = q3::gather_flights("flights.txt");
 
