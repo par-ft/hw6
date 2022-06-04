@@ -105,5 +105,4 @@ TEST(HW6Test, TEST9)
     auto kalman{q4::kalman_filter(sensors)};
     EXPECT_NEAR(kalman.x, 1.102, 0.01);
     EXPECT_NEAR(kalman.y, 0.4440, 0.01);
-    // std::cout << kalman.x << ", " << kalman.y << std::endl;
 }

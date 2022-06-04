@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <numeric>
+#include <initializer_list>
 
 namespace q4
 {
@@ -18,18 +19,21 @@ namespace q4
 
     struct Sensor
     {
+        Sensor() = default;
+        Sensor(double x, double y, double accuracy) : pos{Vector2D(x, y)}, accuracy{accuracy} {}
+        Sensor(std::initializer_list<double> a, double accuracy) : pos{Vector2D(*a.begin(), *a.end())}, accuracy{accuracy} {}
         Vector2D pos;
-        double accuracy;
+        double accuracy{};
     };
 
-    Vector2D kalman_filter(std::vector<Sensor> sensors)
+    inline Vector2D kalman_filter(std::vector<Sensor> sensors)
     {
-        Vector2D point;
+        Sensor point;
 
-        point = std::accumulate(sensors.begin(), sensors.end(), 0, [](const Sensor &a, const Sensor &b) -> Vector2D
-                                { return Vector2D(a.pos.x * a.accuracy + b.pos.x * b.accuracy, a.pos.y * a.accuracy + b.pos.y * b.accuracy); }) /
-                std::accumulate(sensors.begin(), sensors.end(), 0, [](const Sensor &a, const Sensor &b) -> double
-                                { return a.accuracy + b.accuracy; });
+        point = std::accumulate(sensors.begin(), sensors.end(), Sensor{}, [](const Sensor &a, const Sensor &b) -> Sensor
+                                { return Sensor(a.pos.x * a.accuracy + b.pos.x * b.accuracy, a.pos.y * a.accuracy + b.pos.y * b.accuracy, a.accuracy + b.accuracy); });
+
+        return point.pos / point.accuracy;
     }
 }
 
